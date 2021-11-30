@@ -2,15 +2,15 @@ import React, { useMemo } from 'react'
 
 import { ThumbnailContainer } from '../thumbnail-container'
 import { ThumbnailItem } from '../thumbnail-item'
-import { CATEGORY_TYPE } from '../../constants'
+import { TAG_TYPE } from '../../constants'
 
-export const Contents = ({ posts, countOfInitialPost, count, category }) => {
+export const Contents = ({ posts, countOfInitialPost, count, tag }) => {
   const refinedPosts = useMemo(() =>
     posts
       .filter(
         ({ node }) =>
-          category === CATEGORY_TYPE.ALL ||
-          node.frontmatter.category === category
+          tag === TAG_TYPE.ALL ||
+          node.frontmatter.tag.includes(tag) 
       )
       .slice(0, count * countOfInitialPost)
   )

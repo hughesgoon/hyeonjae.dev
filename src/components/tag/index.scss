@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.category-container {
+.tag-container {
   position: sticky;
   position: -webkit-sticky;
   top: 0;
@@ -33,11 +33,11 @@
   }
 }
 
-.category-container::-webkit-scrollbar {
+.tag-container::-webkit-scrollbar {
   display: none; // Safari and Chrome
 }
 
-.category-container {
+.tag-container {
   scroll-behavior: smooth;
 }
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,4 @@
-export const CATEGORY_TYPE = {
+export const TAG_TYPE = {
   ALL: 'All',
 }
 

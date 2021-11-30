@@ -10,7 +10,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          filter: { frontmatter: { category: { ne: null }, draft: { eq: false } } }
+          filter: { frontmatter: { tag: { ne: null }, draft: { eq: false } } }
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
@@ -21,7 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
               frontmatter {
                 title
-                category
+                tag
               }
             }
             previous {
@@ -71,7 +71,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
 
-    createNodeField({
+	createNodeField({
       name: `slug`,
       node,
       value,
