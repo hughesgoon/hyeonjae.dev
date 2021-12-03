@@ -43,9 +43,13 @@ body.light {
     }
   }
 
-  .thumbnail {
+  .thumbnail,
+  .series-thumbnail {
     h3 {
       color: $dark-gray;
+      span {
+        color: $middle-gray;
+      }
     }
     p {
       color: $middle-gray;

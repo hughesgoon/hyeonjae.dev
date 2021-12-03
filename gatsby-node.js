@@ -5,6 +5,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPostTemplate = path.resolve(`./src/templates/blog-post.js`)
+  const blogSeriesTemplate = path.resolve(`./src/templates/blog-series.js`)
 
   return graphql(
     `
@@ -41,6 +42,9 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
+          group(field: frontmatter___series) {
+            fieldValue
+          }
         }
       }
     `
@@ -51,6 +55,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     // Create blog posts pages.
     const posts = result.data.allMarkdownRemark.edges;
+	 
     posts.forEach((post) => {
       createPage({
         path: post.node.fields.slug,
@@ -59,6 +64,20 @@ exports.createPages = ({ graphql, actions }) => {
           slug: post.node.fields.slug,
           previous: post.next,
           next: post.previous,
+        },
+      })
+    })
+    
+    // Create series pages.
+    const seriesNodes = result.data.allMarkdownRemark.group;
+
+    seriesNodes.forEach((series) => {
+      createPage({
+        path: `/series/` + series.fieldValue + `/`,
+        component: blogSeriesTemplate,
+        context: {
+          series: series.fieldValue,
+          seriesInfoPath: "/series/" + series.fieldValue + "/",
         },
       })
     })
@@ -71,7 +90,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
 
-	createNodeField({
+    createNodeField({
       name: `slug`,
       node,
       value,
