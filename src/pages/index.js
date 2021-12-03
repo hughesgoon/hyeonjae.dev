@@ -68,38 +68,40 @@ export default ({ data, location }) => {
 
 export const pageQuery = graphql`
   query {
-  site {
-    siteMetadata {
-      title
-      configs {
-        countOfInitialPost
+    site {
+      siteMetadata {
+        title
+        configs {
+          countOfInitialPost
+        }
+      }
+    }
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tag: { ne: null }, draft: { eq: false } } }
+    ) {
+      edges {
+        node {
+          excerpt(pruneLength: 200, truncate: true)
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            draft
+            tag
+          }
+        }
+      }
+      group(field: frontmatter___tag) {
+        nodes {
+          frontmatter {
+            title
+          }
+        }
+        fieldValue
       }
     }
   }
-  allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {tag: {ne: null}, draft: {eq: false}}}) {
-    edges {
-      node {
-        excerpt(pruneLength: 200, truncate: true)
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          draft
-          tag
-        }
-      }
-    }
-    group(field: frontmatter___tag) {
-      nodes {
-        frontmatter {
-          title
-        }
-      }
-      fieldValue
-    }
-  }
-}
-
 `
