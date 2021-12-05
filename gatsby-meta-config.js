@@ -17,6 +17,12 @@ module.exports = {
   comment: {
     disqusShortName: '', // Your disqus-short-name. check disqus.com.
     utterances: 'JaeYeopHan/gatsby-starter-bee', // Your repository for archive comment
+    giscus: {
+      repo: 'hughesgoon/hyeonjae.dev',
+      repo_id: 'R_kgDOGbwwUQ',
+      category: 'Comment',
+      category_id: 'DIC_kwDOGbwwUc4CAJQr',
+    },
   },
   configs: {
     countOfInitialPost: 10, // Config your initial count of post
