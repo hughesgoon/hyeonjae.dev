@@ -36,16 +36,30 @@ function getTheme(checked) {
   return checked ? THEME.DARK : THEME.LIGHT
 }
 
+function giscusThemeSwitch(theme){
+  const iframe = document.querySelector('iframe.giscus-frame');
+  if (!iframe) return;
+  iframe.contentWindow.postMessage({
+                                     "giscus": {
+                                       "setConfig": {
+                                         "theme": theme,
+                                       }
+                                     }
+                                   }, 'https://giscus.app');
+}
+
 function toggleTheme(theme) {
   switch (theme) {
     case THEME.LIGHT: {
       Dom.addClassToBody(THEME.LIGHT)
       Dom.removeClassToBody(THEME.DARK)
+      giscusThemeSwitch("light")
       break
     }
     case THEME.DARK: {
       Dom.addClassToBody(THEME.DARK)
       Dom.removeClassToBody(THEME.LIGHT)
+      giscusThemeSwitch("dark")
       break
     }
   }
