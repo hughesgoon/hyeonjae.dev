@@ -19,17 +19,21 @@ function getDistance(currentPos) {
 export default ({ data, location }) => {
   const { siteMetadata } = data.site
   const { countOfInitialPost } = siteMetadata.configs
-  
+
   const postGroup = data.postGroup.group
   const seriesInfo = data.infos.nodes
-  
+
   var seriesInfoReform = {}
-  seriesInfo.map(( node ) => (
-    seriesInfoReform[node.fields.slug.split("/")[1]] = {'title': node.frontmatter.title, 'desc': node.frontmatter.desc}
-  ))
-  
+  seriesInfo.map(
+    node =>
+      (seriesInfoReform[node.fields.slug.split('/')[1]] = {
+        title: node.frontmatter.title,
+        desc: node.frontmatter.desc,
+      })
+  )
+
   const [count, countRef, increaseCount] = useRenderedCount()
-  
+
   useIntersectionObserver()
   useScrollEvent(() => {
     const currentPos = window.scrollY + window.innerHeight
@@ -46,10 +50,7 @@ export default ({ data, location }) => {
   return (
     <Layout location={location} title={siteMetadata.title}>
       <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
-      <SeriesInfo
-        postGroup={postGroup}
-        seriesInfo={seriesInfoReform}
-      />
+      <SeriesInfo postGroup={postGroup} seriesInfo={seriesInfoReform} />
     </Layout>
   )
 }

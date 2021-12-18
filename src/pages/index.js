@@ -25,11 +25,8 @@ export default ({ data, location }) => {
   const { countOfInitialPost } = siteMetadata.configs
   const posts = data.allMarkdownRemark.edges
   const groups = data.allMarkdownRemark.group
-  
-  const tags = useMemo(
-    () => _.uniq(groups.map(( group ) => group.fieldValue)),
-    []
-  )
+
+  const tags = useMemo(() => _.uniq(groups.map(group => group.fieldValue)), [])
 
   const [count, countRef, increaseCount] = useRenderedCount()
   const [tag, selectTag] = useTag()
@@ -51,11 +48,7 @@ export default ({ data, location }) => {
     <Layout location={location} title={siteMetadata.title}>
       <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
       <Bio />
-      <Tag
-        tags={tags}
-        tag={tag}
-        selectTag={selectTag}
-      />
+      <Tag tags={tags} tag={tag} selectTag={selectTag} />
       <Contents
         posts={posts}
         countOfInitialPost={countOfInitialPost}
