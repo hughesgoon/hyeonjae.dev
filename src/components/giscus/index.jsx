@@ -19,7 +19,7 @@ export const Giscus = ({ repoConfig }) => {
       'data-repo-id': repoConfig.repo_id,
       'data-category': repoConfig.category,
       'data-category-id': repoConfig.category_id,
-      'data-mapping': 'url',
+      'data-mapping': 'og:title',
       'data-reactions-enabled': '1',
       'data-emit-metadata': '0',
       'data-theme': isDarkTheme ? DARK_THEME : LIGHT_THEME,
