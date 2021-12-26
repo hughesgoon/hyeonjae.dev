@@ -1,10 +1,20 @@
 .switch-container {
-  text-align: right;
+  display: inline-block;
+  padding-left: 4px;
+  vertical-align: middle;
 
   .icon {
     text-align: center;
     color: #222;
     font-size: 14px;
     font-weight: 900;
+  }
+  .react-switch-handle,
+  .react-switch-bg {
+    background: none !important;
+    box-shadow: none !important;
+    div {
+      right: unset !important;
+    }
   }
 }
