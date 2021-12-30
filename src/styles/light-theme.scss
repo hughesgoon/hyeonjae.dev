@@ -6,6 +6,18 @@ body.light {
   .home-header {
     color: $dark-gray;
   }
+  
+  .top {
+    background-color: $light-tag-background-color;
+    .link,
+    .nav-link {
+      color: $dark-gray;
+    }
+    .icon,
+    .github {
+      fill: $dark-gray;
+    }
+  }
 
   .bio {
     .author-name-content {

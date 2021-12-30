@@ -1,0 +1,26 @@
+@import '../../styles/variables.scss';
+
+.nav {
+  display: inline-block;
+  padding-top: 14px;
+  .nav-list {
+    list-style: none;
+    li {
+      display: inline-flex;
+      height: 32px;
+      vertical-align: middle;
+      &:not(:first-of-type) {
+        padding-left: 10px;
+      }
+      &:last-of-type {
+        padding-right: 20px;
+      }
+      a {
+        font-weight: 600;
+        text-rendering: optimizeLegibility;
+        font-size: 16px;
+        opacity: 0.9;
+      }
+    }
+  }
+}

@@ -8,6 +8,18 @@ body.dark {
     color: $dark-light-font-color;
   }
 
+  .top {
+    background-color: $dark-tag-background-color;
+    .link,
+    .nav-link {
+      color: $dark-light-font-color;
+    }
+    .icon,
+    .github {
+      fill: $dark-light-font-color;
+    }
+  }
+
   .bio {
     .author-name-content {
       background-color: $dark-tag-border-color;
