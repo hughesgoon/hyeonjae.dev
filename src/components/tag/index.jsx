@@ -1,16 +1,10 @@
-import React, { useEffect, useCallback, useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { rhythm } from '../../utils/typography'
 import './index.scss'
 import { Item } from './item'
-import * as ScrollManager from '../../utils/scroll'
 
 export const Tag = ({ tags, tag, selectTag }) => {
   const containerRef = useRef(null)
-  let firstPos = 0
-
-  useEffect(tabRef => {
-    firstPos = containerRef.current.getBoundingClientRect().top - 60
-  }, [])
 
   const scrollToCenter = useCallback(tabRef => {
     const { offsetWidth: tabWidth } = tabRef.current
@@ -20,16 +14,8 @@ export const Tag = ({ tags, tag, selectTag }) => {
     const refineLeft = tabLeft - containerLeft
     const targetScollX = scrollLeft + refineLeft - (containerWidth / 2) + (tabWidth / 2)
 
-    if (window.scrollY > firstPos) {
-      ScrollManager.go(firstPos)
-    }
-
     containerRef.current.scroll({ left: targetScollX, top: 0, behavior: 'smooth' })
   }, [containerRef])
-
-  useEffect(() => {
-    ScrollManager.init()
-  }, [])
 
   return (
     <ul

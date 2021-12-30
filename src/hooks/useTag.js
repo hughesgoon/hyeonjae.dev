@@ -3,21 +3,40 @@ import qs from 'query-string'
 import { TAG_TYPE } from '../constants'
 import * as ScrollManager from '../utils/scroll'
 
-export function useTag() {
+let DEST_POS = 200
+
+export function useTag(firstPos) {
   const [tag, setTag] = useState(TAG_TYPE.ALL)
+  DEST_POS = firstPos
+  const adjustScroll = () => {
+    if (window.scrollY > DEST_POS) {
+      ScrollManager.go(DEST_POS)
+    }
+  }
   const selectTag = useCallback(tag => {
     setTag(tag)
+    adjustScroll()
     window.history.pushState(
       { tag },
       '',
       `${window.location.pathname}?${qs.stringify({ tag })}`
     )
   }, [])
-  const changeTag = useCallback(() => {
+  const changeTag = useCallback((withScroll = true) => {
     const { tag } = qs.parse(location.search)
     const target = tag == null ? TAG_TYPE.ALL : tag
 
     setTag(target)
+    if (withScroll) {
+      adjustScroll()
+    }
+  }, [])
+
+  useEffect(() => {
+    ScrollManager.init()
+    return () => {
+      ScrollManager.destroy()
+    }
   }, [])
 
   useEffect(() => {
@@ -29,7 +48,7 @@ export function useTag() {
   }, [])
 
   useEffect(() => {
-    changeTag()
+    changeTag(false)
   }, [])
 
   return [tag, selectTag]

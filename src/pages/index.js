@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby'
 import _ from 'lodash'
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef, useEffect, useState } from 'react'
 import { Bio } from '../components/bio'
 import { Tag } from '../components/tag'
 import { Contents } from '../components/contents'
@@ -28,8 +28,14 @@ export default ({ data, location }) => {
 
   const tags = useMemo(() => _.uniq(groups.map(group => group.fieldValue)), [])
 
+  const bioRef = useRef(null)
+  const [firstPos, setFirstPos] = useState(200)
   const [count, countRef, increaseCount] = useRenderedCount()
-  const [tag, selectTag] = useTag()
+  const [tag, selectTag] = useTag(firstPos)
+
+  useEffect(tabRef => {
+    setFirstPos(!bioRef.current? 200 : bioRef.current.getBoundingClientRect().bottom + window.pageYOffset - 36);
+  }, [bioRef.current])
 
   useIntersectionObserver()
   useScrollEvent(() => {
@@ -47,7 +53,7 @@ export default ({ data, location }) => {
   return (
     <Layout location={location} title={siteMetadata.title}>
       <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
-      <Bio />
+      <Bio ref={bioRef} />
       <Tag tags={tags} tag={tag} selectTag={selectTag} />
       <Contents
         posts={posts}
