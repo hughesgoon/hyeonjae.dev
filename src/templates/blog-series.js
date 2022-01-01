@@ -40,19 +40,17 @@ export default ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteMetadata.title}>
-      <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
+      <Head title={"Series: "+info.title} description={info.desc} />
       <Link to="/series">다른 시리즈들</Link>
       <h1>{info.title}</h1>
       <p>{info.desc}</p>
-      <SeriesContents
-        posts={posts}
-      />
+      <SeriesContents posts={posts} />
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query BlogPostBySeries($series: String! $seriesInfoPath: String!) {
+  query BlogPostBySeries($series: String!, $seriesInfoPath: String!) {
     site {
       siteMetadata {
         title
@@ -97,5 +95,4 @@ export const pageQuery = graphql`
       }
     }
   }
-
 `

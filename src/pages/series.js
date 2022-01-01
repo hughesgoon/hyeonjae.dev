@@ -49,7 +49,7 @@ export default ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteMetadata.title}>
-      <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
+      <Head title="Series" keywords={siteMetadata.keywords} />
       <SeriesInfo postGroup={postGroup} seriesInfo={seriesInfoReform} />
     </Layout>
   )
@@ -85,7 +85,7 @@ export const pageQuery = graphql`
       group(field: frontmatter___series) {
         nodes {
           frontmatter {
-            date
+            date(formatString: "MMMM DD, YYYY")
           }
         }
         fieldValue
