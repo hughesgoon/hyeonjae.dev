@@ -22,7 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
               frontmatter {
                 title
-                tag
+                series
               }
             }
             previous {
@@ -64,6 +64,8 @@ exports.createPages = ({ graphql, actions }) => {
           slug: post.node.fields.slug,
           previous: post.next,
           next: post.previous,
+          series: post.node.frontmatter.series,
+          seriesSlug: "/" + post.node.frontmatter.series + "/",
         },
       })
     })
@@ -77,7 +79,7 @@ exports.createPages = ({ graphql, actions }) => {
         component: blogSeriesTemplate,
         context: {
           series: series.fieldValue,
-          seriesInfoPath: "/series/" + series.fieldValue + "/",
+          seriesSlug: "/" + series.fieldValue + "/",
         },
       })
     })
