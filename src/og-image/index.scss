@@ -1,0 +1,109 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.ogImage {
+  .ogBackground {
+    z-index: -1;
+    width: 1200px;
+    height: 630px;
+    background: linear-gradient(101.7deg, #44ffdd -4.58%, #6a4c9f 113.41%);
+    -webkit-mask-image: repeating-linear-gradient(
+      -65deg,
+      #ffffff00,
+      #ffffff00 18px,
+      #0000004d 0,
+      #0000004d 22px
+    );
+  }
+
+  .series {
+    border-radius: 20px;
+  }
+  .post {
+    border-radius: 50%;
+  }
+
+  .ogData {
+    z-index: 1;
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    left: 340px;
+    top: 55px;
+    background: #ffffffd9;
+    backdrop-filter: blur(6px);
+
+    .ogSeries {
+      font-family: "Noto Sans KR";
+      z-index: 2;
+      position: absolute;
+      color: #ffffff;
+      background: linear-gradient(101.7deg, #44ffdd -4.58%, #6a4c9f 113.41%);
+      font-size: 30px;
+      position: absolute;
+      font-weight: bold;
+      width: 120px;
+      left: 200px;
+      top: 135px;
+      text-align: center;
+    }
+    .ogPost {
+      font-family: "Noto Sans KR";
+      z-index: 2;
+      position: absolute;
+      color: #ffffff;
+      background: linear-gradient(101.7deg, #44ffdd -4.58%, #6a4c9f 113.41%);
+      font-size: 30px;
+      position: absolute;
+      font-weight: bold;
+      width: 220px;
+      left: 150px;
+      top: 135px;
+      text-align: center;
+    }
+    .ogTitle {
+      width: 480px;
+      height: 140px;
+      left: 20px;
+      top: 190px;
+      z-index: 2;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h1 {
+        width: 480px;
+        font-family: "Noto Sans KR";
+        font-weight: bold;
+        font-size: 56px;
+        border-bottom: none;
+        text-align: center;
+        color: #000000;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-break: keep-all;
+        overflow: hidden;
+      }
+    }
+    .ogContent {
+      font-family: "Noto Sans KR";
+      z-index: 2;
+      position: absolute;
+      width: 480px;
+      height: 70px;
+      left: 20px;
+      top: 345px;
+      font-weight: 500;
+      font-size: 24px;
+      color: #000000;
+      text-align: center;
+      word-wrap: break-word;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      word-break: keep-all;
+      overflow: hidden;
+    }
+  }
+}

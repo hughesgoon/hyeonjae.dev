@@ -1,11 +1,14 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const { createOpenGraphImage } = require(`gatsby-plugin-open-graph-images`)
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPostTemplate = path.resolve(`./src/templates/blog-post.js`)
   const blogSeriesTemplate = path.resolve(`./src/templates/blog-series.js`)
+  const blogPostOgTemplate = path.resolve(`./src/og-image/blog-post.og-image.js`)
+  const blogSeriesOgTemplate = path.resolve(`./src/og-image/blog-series.og-image.js`)
 
   return graphql(
     `
@@ -66,6 +69,13 @@ exports.createPages = ({ graphql, actions }) => {
           next: post.previous,
           series: post.node.frontmatter.series,
           seriesSlug: "/" + post.node.frontmatter.series + "/",
+          ogImage: createOpenGraphImage(createPage, {
+            path: `og-images/post/${post.node.fields.slug.replace(/\//g,"")}.png`,
+            component: blogPostOgTemplate,
+            context: {
+              slug: post.node.fields.slug,
+            }
+          }),
         },
       })
     })
@@ -80,6 +90,13 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           series: series.fieldValue,
           seriesSlug: "/" + series.fieldValue + "/",
+          ogImage: createOpenGraphImage(createPage, {
+            path: `og-images/series/${series.fieldValue}.png`,
+            component: blogSeriesOgTemplate,
+            context: {
+              seriesSlug: "/" + series.fieldValue + "/",
+            }
+          }),
         },
       })
     })

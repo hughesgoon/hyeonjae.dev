@@ -119,6 +119,12 @@ module.exports = {
         publisherId: metaConfig.ad,
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [`/__generated/*`],
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-feed`,
@@ -126,6 +132,6 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-lodash`,
-    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-open-graph-images`,
   ],
 }
