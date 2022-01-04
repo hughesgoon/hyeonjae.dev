@@ -71,6 +71,22 @@ body.light {
     }
   }
 
+  .series-collect-container {
+    background: $light-tag-background-color;
+    .series-collect-title {
+      color: $dark-gray;
+    }
+    .series-collect {
+      color: $middle-gray;
+      &.viewing {
+        color: $dark-gray;
+      }
+      &:hover {
+      text-shadow: $light-hover-text-shadow;
+      }
+    }
+  }
+
   .footer {
     color: $light-gray;
     a {

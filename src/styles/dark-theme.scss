@@ -72,6 +72,22 @@ body.dark {
     }
   }
 
+  .series-collect-container {
+    background: $dark-tag-background-color;
+    .series-collect-title {
+      color: $dark-lightest-font-color;
+    }
+    .series-collect {
+      color: $dark-middle-font-color;
+      &.viewing {
+        color: $dark-lightest-font-color;
+      }
+      &:hover {
+      text-shadow: $dark-hover-text-shadow;
+      }
+    }
+  }
+
   .footer {
     color: $dark-middle-font-color;
     a {
