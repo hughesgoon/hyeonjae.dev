@@ -87,6 +87,16 @@ body.light {
     }
   }
 
+  .series-next-post-container {
+    background: $light-tag-background-color;
+    &:hover {
+      text-shadow: $light-hover-text-shadow;
+    }
+    h4, p {
+      color: $dark-gray;
+    }
+  }
+
   .footer {
     color: $light-gray;
     a {
