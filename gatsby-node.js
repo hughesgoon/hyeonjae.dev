@@ -70,7 +70,7 @@ exports.createPages = ({ graphql, actions }) => {
           series: post.node.frontmatter.series,
           seriesSlug: "/" + post.node.frontmatter.series + "/",
           ogImage: createOpenGraphImage(createPage, {
-            path: `og-images/post/${post.node.fields.slug.replace(/\//g,"")}.png`,
+            path: `/og-images/post/${post.node.fields.slug.replace(/\//g,"")}.png`,
             component: blogPostOgTemplate,
             context: {
               slug: post.node.fields.slug,
@@ -91,7 +91,7 @@ exports.createPages = ({ graphql, actions }) => {
           series: series.fieldValue,
           seriesSlug: "/" + series.fieldValue + "/",
           ogImage: createOpenGraphImage(createPage, {
-            path: `og-images/series/${series.fieldValue}.png`,
+            path: `/og-images/series/${series.fieldValue}.png`,
             component: blogSeriesOgTemplate,
             context: {
               seriesSlug: "/" + series.fieldValue + "/",
