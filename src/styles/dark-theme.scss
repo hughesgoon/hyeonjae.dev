@@ -32,6 +32,13 @@ body.dark {
     }
   }
 
+  .link-to-series {
+    color: $dark-lightest-font-color;
+    &:hover {
+      text-shadow: $dark-hover-text-shadow;
+    }
+  }
+
   .tag-container {
     border-top: 1px solid $dark-tag-border-color;
     border-bottom: 1px solid $dark-tag-border-color;

@@ -9,7 +9,12 @@
   padding: 0;
 
   li {
+    max-width: 40%;
+    height: 32px;
     margin-bottom: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   a {
