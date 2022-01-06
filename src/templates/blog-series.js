@@ -17,11 +17,11 @@ function getDistance(currentPos) {
   return Dom.getDocumentHeight() - currentPos
 }
 
-export default ({ data, location }) => {
+export default ({ data, location, pageContext }) => {
   const { siteMetadata } = data.site
   const { countOfInitialPost } = siteMetadata.configs
   const posts = data.allMarkdownRemark.edges
-  const info = data.seriesInfo.nodes[0].frontmatter
+  const info = data.seriesInfo.frontmatter
 
   const [count, countRef, increaseCount] = useRenderedCount()
 
@@ -39,9 +39,11 @@ export default ({ data, location }) => {
   })
 
   return (
-    <Layout location={location} title={siteMetadata.title}>
-      <Head title={"Series: "+info.title} description={info.desc} />
-      <Link to="/series">다른 시리즈들</Link>
+    <Layout location={location} title={siteMetadata.title} >
+      <Head title={"Series: "+info.title} description={info.desc} image={pageContext.ogImage.path} />
+      <Link className="link-to-series" to="/series">
+        <p>← 다른 시리즈들</p>
+      </Link>
       <h1>{info.title}</h1>
       <p>{info.desc}</p>
       <SeriesContents posts={posts} />
@@ -50,7 +52,7 @@ export default ({ data, location }) => {
 }
 
 export const pageQuery = graphql`
-  query BlogPostBySeries($series: String!, $seriesInfoPath: String!) {
+  query BlogPostBySeries($series: String!, $seriesSlug: String!) {
     site {
       siteMetadata {
         title
@@ -84,14 +86,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    seriesInfo: allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: $seriesInfoPath } }
-    ) {
-      nodes {
-        frontmatter {
-          title
-          desc
-        }
+    seriesInfo: markdownRemark(fields: { slug: { eq: $seriesSlug } }) {
+      frontmatter {
+        title
+        desc
       }
     }
   }
