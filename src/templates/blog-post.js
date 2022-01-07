@@ -7,68 +7,60 @@ import { Head } from '../components/head'
 import { PostTitle } from '../components/post-title'
 import { PostDate } from '../components/post-date'
 import { PostContainer } from '../components/post-container'
-import { SocialShare } from '../components/social-share'
-import { SponsorButton } from '../components/sponsor-button'
+import { SeriesCollect } from '../components/series-collect'
+import { SeriesNextPost } from '../components/series-next-post'
 import { Bio } from '../components/bio'
 import { PostNavigator } from '../components/post-navigator'
-import { Disqus } from '../components/disqus'
-import { Utterances } from '../components/utterances'
-import * as ScrollManager from '../utils/scroll'
+import { Giscus } from '../components/giscus'
 
 import '../styles/code.scss'
 import 'katex/dist/katex.min.css'
 
 export default ({ data, pageContext, location }) => {
-  useEffect(() => {
-    ScrollManager.init()
-    return () => ScrollManager.destroy()
-  }, [])
-
   const post = data.markdownRemark
   const metaData = data.site.siteMetadata
+  const seriesTitle = !data.seriesInfo ? null : data.seriesInfo.frontmatter.title
+  const seriesContents = !seriesTitle ? null : data.seriesContents.nodes
   const { title, comment, siteUrl, author, sponsor } = metaData
-  const { disqusShortName, utterances } = comment
-  const { title: postTitle, date } = post.frontmatter
+  const { giscus } = comment
+  const { title: postTitle, date, tag } = post.frontmatter
+  const postOrderInSeries = !seriesTitle ? null : seriesContents.findIndex(post => post.frontmatter.title === postTitle)
 
   return (
     <Layout location={location} title={title}>
-      <Head title={postTitle} description={post.excerpt} />
+      <Head title={postTitle} description={post.excerpt} image={pageContext.ogImage.path} />
       <PostTitle title={postTitle} />
       <PostDate date={date} />
+      {seriesTitle && (
+        <SeriesCollect seriesContents={seriesContents} seriesSlug={pageContext.seriesSlug} seriesTitle={seriesTitle} postTitle={postTitle} />
+      )}
       <PostContainer html={post.html} />
-      <SocialShare title={postTitle} author={author} />
-      {!!sponsor.buyMeACoffeeId && (
-        <SponsorButton sponsorId={sponsor.buyMeACoffeeId} />
+      {seriesContents &&
+       postOrderInSeries != seriesContents.length-1 && (
+        <SeriesNextPost post={seriesContents[postOrderInSeries+1]} />
       )}
       <Elements.Hr />
       <Bio />
       <PostNavigator pageContext={pageContext} />
-      {!!disqusShortName && (
-        <Disqus
-          post={post}
-          shortName={disqusShortName}
-          siteUrl={siteUrl}
-          slug={pageContext.slug}
-        />
-      )}
-      {!!utterances && <Utterances repo={utterances} />}
+      <Giscus repoConfig={giscus} />
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String!, $series: String, $seriesSlug: String) {
     site {
       siteMetadata {
         title
         author
         siteUrl
         comment {
-          disqusShortName
-          utterances
-        }
-        sponsor {
-          buyMeACoffeeId
+          giscus {
+            category
+            category_id
+            repo
+            repo_id
+          }
         }
       }
     }
@@ -79,6 +71,25 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        tag
+      }
+    }
+    seriesInfo: markdownRemark(fields: { slug: { eq: $seriesSlug } }) {
+      frontmatter {
+        title
+      }
+    }
+    seriesContents: allMarkdownRemark(
+      filter: { frontmatter: { series: { eq: $series, ne: null }, tag: { ne: null } } }
+      sort: { fields: frontmatter___date, order: ASC }
+    ) {
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+        }
       }
     }
   }
