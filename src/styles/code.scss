@@ -148,3 +148,17 @@ pre[class*='language-'] {
 .token.inserted {
   color: green;
 }
+
+@media screen and (min-width: 769px) {
+  pre[class*='language-']:hover {
+    overflow-x: overlay;
+    &::-webkit-scrollbar {
+      display: block;
+      height: 7px;
+      background-color: #212121;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: #7d7d7d;
+    }
+  }
+}

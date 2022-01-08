@@ -61,6 +61,11 @@ body.dark {
         color: $dark-tag-highlight-text-color;
       }
     }
+    @media screen and (min-width: 769px) {
+      &:hover::-webkit-scrollbar-thumb{
+        background-color: $dark-tag-highlight-border-color;
+      }
+    }
   }
 
   .thumbnail,
