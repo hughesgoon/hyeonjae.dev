@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-export function Head({ description, lang, meta, keywords, title, image }) {
+export function Head({ description, lang, meta, title, image }) {
   return (
     <StaticQuery
       query={detailsQuery}
@@ -60,16 +60,7 @@ export function Head({ description, lang, meta, keywords, title, image }) {
                 name: `twitter:image`,
                 content: data.site.siteMetadata.siteUrl + ogImage,
               },
-            ]
-              .concat(
-                keywords.length > 0
-                  ? {
-                      name: `keywords`,
-                      content: keywords.join(`, `),
-                    }
-                  : []
-              )
-              .concat(meta)}
+            ]}
           />
         )
       }}
@@ -80,14 +71,12 @@ export function Head({ description, lang, meta, keywords, title, image }) {
 Head.defaultProps = {
   lang: `ko`,
   meta: [],
-  keywords: [],
 }
 
 Head.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.array,
-  keywords: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired,
 }
 

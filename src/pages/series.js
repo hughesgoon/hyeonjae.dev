@@ -49,7 +49,7 @@ export default ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteMetadata.title}>
-      <Head title="Series" keywords={siteMetadata.keywords} />
+      <Head title="Series" />
       <SeriesInfo postGroup={postGroup} seriesInfo={seriesInfoReform} />
     </Layout>
   )

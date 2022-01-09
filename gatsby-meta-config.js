@@ -13,7 +13,6 @@ module.exports = {
     instagram: ``, // Your Instagram account
   },
   icon: `content/assets/favicon.png`, // Add your favicon
-  keywords: [`blog`],
   comment: {
     giscus: {
       repo: 'hughesgoon/hyeonjae.dev',
