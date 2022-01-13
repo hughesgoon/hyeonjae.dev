@@ -49,7 +49,7 @@ export default ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteMetadata.title}>
-      <Head title="Series" />
+      <Head title="Series" description="Hughes의 시리즈 글 모아보기" />
       <SeriesInfo postGroup={postGroup} seriesInfo={seriesInfoReform} />
     </Layout>
   )

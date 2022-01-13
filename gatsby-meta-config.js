@@ -1,18 +1,18 @@
 module.exports = {
   title: `Hyeonjae.dev`,
-  description: `Blog posted about ...`,
+  description: `Hughes의 개발 블로그: 인공지능, 웹 등 경험을 나눕니다.`,
   author: `Hughes(hyeonjae.kim)`,
-  introduction: `I explain with words and code. I explain with words and code. I explain with words and code.`,
+  introduction: `👨‍💻 조그마한 경험을 나누는 학생 개발자`,
   siteUrl: `https://hyeonjae.dev`,
   social: {
-    twitter: ``, // Your Twitter account
-    github: `hughesgoon`, // Your GitHub account
-    medium: ``, // Your Medium account
-    facebook: `guswo0527`, // Your Facebook account
-    linkedin: ``, // Your LinkedIn account
-    instagram: ``, // Your Instagram account
+    twitter: ``,
+    github: `hughesgoon`,
+    medium: ``,
+    facebook: `guswo0527`,
+    linkedin: ``,
+    instagram: ``,
   },
-  icon: `content/assets/favicon.png`, // Add your favicon
+  icon: `content/assets/favicon.png`,
   comment: {
     giscus: {
       repo: 'hughesgoon/hyeonjae.dev',
@@ -22,13 +22,13 @@ module.exports = {
     },
   },
   configs: {
-    countOfInitialPost: 10, // Config your initial count of post
+    countOfInitialPost: 5,
   },
   sponsor: {
     buyMeACoffeeId: '',
   },
   share: {
-    facebookAppId: '', // Add facebookAppId for using facebook share feature v3.2
+    facebookAppId: '',
   },
   gtm: 'GTM-MCGXNKS',
 }

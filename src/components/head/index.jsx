@@ -11,7 +11,7 @@ export function Head({ description, lang, meta, title, image }) {
         const metaDescription =
           description || data.site.siteMetadata.description
         const ogImage = 
-          image || "/test.png"
+          image || "/og-blog.png"
         return (
           <Helmet
             htmlAttributes={{
