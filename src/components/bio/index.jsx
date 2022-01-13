@@ -30,28 +30,28 @@ export const Bio = forwardRef((props, ref) => {
                 <div className="author-introduction">{introduction}</div>
                 <p className="author-socials">
                   {social.instagram && (
-                    <a href={`https://www.instagram.com/${social.instagram}`}>
+                    <a href={`https://www.instagram.com/${social.instagram}`} target='_blank' rel="noopener">
                       Instagram
                     </a>
                   )}
                   {social.github && (
-                    <a href={`https://github.com/${social.github}`}>GitHub</a>
+                    <a href={`https://github.com/${social.github}`} target='_blank' rel="noopener">GitHub</a>
                   )}
                   {social.medium && (
-                    <a href={`https://medium.com/${social.medium}`}>Medium</a>
+                    <a href={`https://medium.com/${social.medium}`} target='_blank' rel="noopener">Medium</a>
                   )}
                   {social.twitter && (
-                    <a href={`https://twitter.com/${social.twitter}`}>
+                    <a href={`https://twitter.com/${social.twitter}`} target='_blank' rel="noopener">
                       Twitter
                     </a>
                   )}
                   {social.facebook && (
-                    <a href={`https://www.facebook.com/${social.facebook}`}>
+                    <a href={`https://www.facebook.com/${social.facebook}`} target='_blank' rel="noopener">
                       Facebook
                     </a>
                   )}
                   {social.linkedin && (
-                    <a href={`https://www.linkedin.com/in/${social.linkedin}/`}>
+                    <a href={`https://www.linkedin.com/in/${social.linkedin}/`} target='_blank' rel="noopener">
                       LinkedIn
                     </a>
                   )}
