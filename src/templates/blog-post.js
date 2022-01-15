@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 
 import * as Elements from '../components/elements'
+import * as ScrollManager from '../utils/scroll'
 import { Layout } from '../layout'
 import { Head } from '../components/head'
 import { PostTitle } from '../components/post-title'
@@ -25,6 +26,13 @@ export default ({ data, pageContext, location }) => {
   const { giscus } = comment
   const { title: postTitle, date, tag } = post.frontmatter
   const postOrderInSeries = !seriesTitle ? null : seriesContents.findIndex(post => post.frontmatter.title === postTitle)
+
+  useEffect(() => {
+    ScrollManager.init()
+    return () => {
+      ScrollManager.destroy()
+    }
+  }, [])
 
   return (
     <Layout location={location} title={title}>
