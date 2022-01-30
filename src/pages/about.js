@@ -1,8 +1,10 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import { rhythm } from '../utils/typography'
 import * as Lang from '../constants'
+
+import '../styles/resume.scss'
 
 export default ({ data }) => {
   const resumes = data.allMarkdownRemark.edges
@@ -16,13 +18,16 @@ export default ({ data }) => {
       style={{
         marginLeft: `auto`,
         marginRight: `auto`,
-        maxWidth: rhythm(24),
+        maxWidth: rhythm(30),
         padding: `${rhythm(0.5)} ${rhythm(3 / 4)} ${rhythm(1.5)} ${rhythm(
           3 / 4
         )}`,
       }}
     >
-      <div dangerouslySetInnerHTML={{ __html: resume.html }} />
+      <Link to="/">
+        <p>← 블로그로 돌아가기</p>
+      </Link>
+      <div class="about" dangerouslySetInnerHTML={{ __html: resume.html }} />
     </div>
   )
 }
