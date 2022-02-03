@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-
+import { Head } from '../components/head'
 import { rhythm } from '../utils/typography'
 import * as Lang from '../constants'
 
@@ -24,6 +24,7 @@ export default ({ data }) => {
         )}`,
       }}
     >
+      <Head title="About Hughes" description="김현재(Hughes)의 이력서 | 학생개발자 김현재입니다." image="/og-resume.png" />
       <Link to="/">
         <p>← 블로그로 돌아가기</p>
       </Link>
