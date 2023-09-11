@@ -26,16 +26,28 @@ export default ({ data, location }) => {
   const posts = data.allMarkdownRemark.edges
   const groups = data.allMarkdownRemark.group
 
-  const tags = useMemo(() => _.uniq(groups.map(group => group.fieldValue)), [])
+  const tags = useMemo(
+    () => _.uniq(groups.map((group) => group.fieldValue)),
+    []
+  )
 
   const bioRef = useRef(null)
   const [firstPos, setFirstPos] = useState(200)
   const [count, countRef, increaseCount] = useRenderedCount()
   const [tag, selectTag] = useTag(firstPos)
 
-  useEffect(tabRef => {
-    setFirstPos(!bioRef.current? 200 : bioRef.current.getBoundingClientRect().bottom + window.pageYOffset - 36);
-  }, [bioRef.current])
+  useEffect(
+    (tabRef) => {
+      setFirstPos(
+        !bioRef.current
+          ? 200
+          : bioRef.current.getBoundingClientRect().bottom +
+              window.pageYOffset -
+              36
+      )
+    },
+    [bioRef.current]
+  )
 
   useIntersectionObserver()
   useScrollEvent(() => {
@@ -76,7 +88,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tag: { ne: null }, draft: { eq: false } } }
     ) {
       edges {
@@ -93,7 +105,7 @@ export const pageQuery = graphql`
           }
         }
       }
-      group(field: frontmatter___tag) {
+      group(field: { frontmatter: { tag: SELECT } }) {
         nodes {
           frontmatter {
             title

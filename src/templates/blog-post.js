@@ -20,12 +20,16 @@ import 'katex/dist/katex.min.css'
 export default ({ data, pageContext, location }) => {
   const post = data.markdownRemark
   const metaData = data.site.siteMetadata
-  const seriesTitle = !data.seriesInfo ? null : data.seriesInfo.frontmatter.title
+  const seriesTitle = !data.seriesInfo
+    ? null
+    : data.seriesInfo.frontmatter.title
   const seriesContents = !seriesTitle ? null : data.seriesContents.nodes
   const { title, comment, siteUrl, author, sponsor } = metaData
   const { giscus } = comment
   const { title: postTitle, date, tag } = post.frontmatter
-  const postOrderInSeries = !seriesTitle ? null : seriesContents.findIndex(post => post.frontmatter.title === postTitle)
+  const postOrderInSeries = !seriesTitle
+    ? null
+    : seriesContents.findIndex((post) => post.frontmatter.title === postTitle)
 
   useEffect(() => {
     ScrollManager.init()
@@ -36,16 +40,24 @@ export default ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location} title={title}>
-      <Head title={postTitle} description={post.excerpt} image={pageContext.ogImage.path} />
+      <Head
+        title={postTitle}
+        description={post.excerpt}
+        image={pageContext.ogImage.path}
+      />
       <PostTitle title={postTitle} />
       <PostDate date={date} />
       {seriesTitle && (
-        <SeriesCollect seriesContents={seriesContents} seriesSlug={pageContext.seriesSlug} seriesTitle={seriesTitle} postTitle={postTitle} />
+        <SeriesCollect
+          seriesContents={seriesContents}
+          seriesSlug={pageContext.seriesSlug}
+          seriesTitle={seriesTitle}
+          postTitle={postTitle}
+        />
       )}
       <PostContainer html={post.html} />
-      {seriesContents &&
-       postOrderInSeries != seriesContents.length-1 && (
-        <SeriesNextPost post={seriesContents[postOrderInSeries+1]} />
+      {seriesContents && postOrderInSeries != seriesContents.length - 1 && (
+        <SeriesNextPost post={seriesContents[postOrderInSeries + 1]} />
       )}
       <Elements.Hr />
       <Bio />
@@ -88,8 +100,10 @@ export const pageQuery = graphql`
       }
     }
     seriesContents: allMarkdownRemark(
-      filter: { frontmatter: { series: { eq: $series, ne: null }, tag: { ne: null } } }
-      sort: { fields: frontmatter___date, order: ASC }
+      filter: {
+        frontmatter: { series: { eq: $series, ne: null }, tag: { ne: null } }
+      }
+      sort: { frontmatter: { date: ASC } }
     ) {
       nodes {
         fields {

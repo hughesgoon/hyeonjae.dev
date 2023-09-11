@@ -25,7 +25,7 @@ export default ({ data, location }) => {
 
   var seriesInfoReform = {}
   seriesInfo.map(
-    node =>
+    (node) =>
       (seriesInfoReform[node.fields.slug.split('/')[1]] = {
         title: node.frontmatter.title,
         desc: node.frontmatter.desc,
@@ -79,10 +79,10 @@ export const pageQuery = graphql`
       }
     }
     postGroup: allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tag: { ne: null }, draft: { eq: false } } }
     ) {
-      group(field: frontmatter___series) {
+      group(field: { frontmatter: { series: SELECT } }) {
         nodes {
           frontmatter {
             date(formatString: "MMMM DD, YYYY")

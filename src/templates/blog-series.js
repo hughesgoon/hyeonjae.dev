@@ -39,8 +39,12 @@ export default ({ data, location, pageContext }) => {
   })
 
   return (
-    <Layout location={location} title={siteMetadata.title} >
-      <Head title={"Series: "+info.title} description={info.desc} image={pageContext.ogImage.path} />
+    <Layout location={location} title={siteMetadata.title}>
+      <Head
+        title={'Series: ' + info.title}
+        description={info.desc}
+        image={pageContext.ogImage.path}
+      />
       <Link className="link-to-series" to="/series">
         <p>← 다른 시리즈들</p>
       </Link>
@@ -62,7 +66,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date] }
+      sort: { frontmatter: { date: ASC } }
       filter: {
         frontmatter: {
           series: { eq: $series }
